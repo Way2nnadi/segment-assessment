@@ -24,34 +24,62 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// create an analytics instance - set it for development
 var analytics = new _analyticsNode2.default('csDqnJdlycujIJhlE76Yheo8LdvTLIw9', { flushAt: 1 });
 
-function sendEventsToAmplitude(respnse) {
+/*
+  Exportable Functions
+*/
+
+/**
+ * Reads each line from our events file as a stream
+ * then identity the user and track the associated event
+ * 
+ * @param {Object} => the response object from the route
+ */
+
+function sendEventsToAmplitude(response) {
   var lineReader = readline.createInterface({
     input: _fs2.default.createReadStream('data/test.txt')
   });
 
   lineReader.on('line', function (line) {
-
     var event = JSON.parse(line);
-    identifyAndTrackEvent(event);
+    // identifyAndTrackEvent(event);
   });
+
+  lineReader.on('close', function () {
+    console.log('Events were all properly transfered to Amplitude');
+  });
+
+  response.send('ok');
 }
 
-sendEventsToAmplitude();
+/*
+  Ultra Utility Functions
+*/
 
+/**
+ * Identifies the user and tracks the associated event
+ * 
+ * @param {Object} 
+ */
 function identifyAndTrackEvent(evt) {
-  analytics.identify({
-    userId: evt.userId,
-    traits: _extends({}, event)
-  });
-
-  analytics.track({
-    event: evt.event || "Member Added",
-    userId: evt.userId,
-    integrations: {
-      'All': false,
-      'Amplitude': true
-    }
+  new Promise(function () {
+    return analytics.identify({
+      userId: evt.userId,
+      traits: _extends({}, evt)
+    });
+  }).then(function () {
+    analytics.track({
+      event: evt.event || "Member Added",
+      userId: evt.userId,
+      integrations: {
+        'All': false,
+        'Amplitude': true
+      }
+    });
+  }).catch(function (err) {
+    console.log(err);
   });
 }
