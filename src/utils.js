@@ -3,7 +3,7 @@ import * as readline from 'readline';
 import fs from 'fs';
 
 // create an analytics instance - set it for development
-let analytics = new Analytics('csDqnJdlycujIJhlE76Yheo8LdvTLIw9', { flushAt: 1 });
+let analytics = new Analytics('csDqnJdlycujIJhlE76Yheo8LdvTLIw9');
 
 /*
   Exportable Functions
