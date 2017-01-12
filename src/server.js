@@ -11,11 +11,9 @@ let port = process.env.PORT || 3000;
 // MIDDLEWARE
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended: true}));
-server.use('/static', express.static(path.join(__dirname, 'public')))
 
 // ROUTES
 routes(server);
-// analyze();
 
 server.listen(port, () => {
   console.log(`Listening on Port: ${port}`);

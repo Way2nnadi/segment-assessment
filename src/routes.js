@@ -20,6 +20,7 @@ export default function routes(server) {
     })
   });
 
+  // sends events through Segment into Amplitude
   server.post('/start/events', (req, res) => {
     sendEventsToAmplitude(res);
   })
