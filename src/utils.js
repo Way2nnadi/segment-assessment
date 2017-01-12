@@ -44,25 +44,20 @@ export function sendEventsToAmplitude(response) {
  * @param {Object} 
  */
 function identifyAndTrackEvent(evt) {
-  new Promise(() => {
-    analytics.identify({
-      userId: evt.userId,
-      traits: {
-        ...evt
-      }
-    });
+  analytics.identify({
+    userId: evt.userId,
+    traits: {
+      ...evt
+    }
+  });
 
-    analytics.track({
-      event: evt.event || "Member Added",
-      userId: evt.userId,
-      integrations: {
-        'All': false,
-        'Amplitude': true
-      }
-    })
-  })
-  .catch((err) => {
-    console.log(err);
+  analytics.track({
+    event: evt.event || "Member Added",
+    userId: evt.userId,
+    integrations: {
+      'All': false,
+      'Amplitude': true
+    }
   })
 }
 
