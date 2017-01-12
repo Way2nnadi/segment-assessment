@@ -45,14 +45,13 @@ export function sendEventsToAmplitude(response) {
  */
 function identifyAndTrackEvent(evt) {
   new Promise(() => {
-    return analytics.identify({
+    analytics.identify({
       userId: evt.userId,
       traits: {
         ...evt
       }
     });
-  })
-  .then(() => {
+
     analytics.track({
       event: evt.event || "Member Added",
       userId: evt.userId,
