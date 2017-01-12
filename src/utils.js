@@ -17,6 +17,10 @@ let analytics = new Analytics('csDqnJdlycujIJhlE76Yheo8LdvTLIw9', { flushAt: 1 }
  */
 
 export function sendEventsToAmplitude(response) {
+
+  /*
+    Load the events one line at a time 
+  */
   let lineReader = readline.createInterface({
     input: fs.createReadStream('data/events.txt')
   })
@@ -45,6 +49,12 @@ export function sendEventsToAmplitude(response) {
  */
 
 function identifyAndTrackEvent(evt) {
+
+  /*
+    Leveraged promise catch function to catch any potentioal errors 
+    through the track and identify API calls 
+  */
+
   new Promise(() => {
     analytics.identify({
       userId: evt.userId,

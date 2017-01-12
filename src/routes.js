@@ -8,11 +8,10 @@ export default function routes(server) {
     // old school way to load html files into the brower
     // wanted to make the err handling a bit more explicit
     fs.readFile('index.html', (err, data) => {
-      if(err){
+      if(err) {
          res.writeHead(404);
          res.write("Not Found!");
-      }
-      else{
+      } else {
          res.writeHead(200, {'Content-Type': 'text/html'});
          res.write(data);
       }
