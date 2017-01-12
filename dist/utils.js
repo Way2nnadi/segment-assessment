@@ -45,7 +45,7 @@ function sendEventsToAmplitude(response) {
 
   lineReader.on('line', function (line) {
     var event = JSON.parse(line);
-    // identifyAndTrackEvent(event);
+    identifyAndTrackEvent(event);
   });
 
   lineReader.on('close', function () {

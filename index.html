@@ -15,9 +15,21 @@
 
 <body>
   <div><strong>Warning:</strong> clicking button might result in unexpected satisfaction</div>
-  <button>Start Events</button>
+  <button class="button">Start Events</button>
   <script>
-    
+    $( ".button" ).on('click', function( event ) {
+      $.ajax({
+          url: '/start/events',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          method: 'POST',
+          dataType: 'json',
+          success: function(data){
+            console.log("Request to start events was properly made")
+          }
+        });
+    });
   </script>
 </body>
 </html>

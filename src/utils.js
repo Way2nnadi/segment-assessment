@@ -20,10 +20,10 @@ export function sendEventsToAmplitude(response) {
   let lineReader = readline.createInterface({
     input: fs.createReadStream('data/test.txt')
   })
-  
+
   lineReader.on('line', (line) => {
     let event = JSON.parse(line);
-    // identifyAndTrackEvent(event);
+    identifyAndTrackEvent(event);
   })
 
   lineReader.on('close', () => {
