@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "babel lib -d dist",
+    "build": "babel src -d dist",
     "serve": "nodemon lib/server.js --exec babel-node",
     "test": "mocha --compilers js:babel-register"
   },
