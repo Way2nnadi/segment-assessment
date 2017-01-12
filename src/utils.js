@@ -18,7 +18,7 @@ let analytics = new Analytics('csDqnJdlycujIJhlE76Yheo8LdvTLIw9', { flushAt: 1 }
 
 export function sendEventsToAmplitude(response) {
   let lineReader = readline.createInterface({
-    input: fs.createReadStream('data/test.txt')
+    input: fs.createReadStream('data/events.txt')
   })
 
   lineReader.on('line', (line) => {
