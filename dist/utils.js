@@ -40,7 +40,7 @@ var analytics = new _analyticsNode2.default('csDqnJdlycujIJhlE76Yheo8LdvTLIw9', 
 
 function sendEventsToAmplitude(response) {
   var lineReader = readline.createInterface({
-    input: _fs2.default.createReadStream('data/test.txt')
+    input: _fs2.default.createReadStream('data/events.txt')
   });
 
   lineReader.on('line', function (line) {
