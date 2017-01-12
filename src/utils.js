@@ -43,22 +43,46 @@ export function sendEventsToAmplitude(response) {
  * 
  * @param {Object} 
  */
-function identifyAndTrackEvent(evt) {
-  analytics.identify({
-    userId: evt.userId,
-    traits: {
-      ...evt
-    }
-  });
+// function identifyAndTrackEvent(evt) {
+//   analytics.identify({
+//     userId: evt.userId,
+//     traits: {
+//       ...evt
+//     }
+//   });
 
-  analytics.track({
-    event: evt.event || "Member Added",
-    userId: evt.userId,
-    integrations: {
-      'All': false,
-      'Amplitude': true
-    }
+//   analytics.track({
+//     event: evt.event || "Member Added",
+//     userId: evt.userId,
+//     integrations: {
+//       'All': false,
+//       'Amplitude': true
+//     }
+//   })
+// }
+
+function identifyAndTrackEvent(evt) {
+  new Promise(() => {
+    analytics.identify({
+      userId: evt.userId,
+      traits: {
+        ...evt
+      }
+    });
+
+    analytics.track({
+      event: evt.event || "Member Added",
+      userId: evt.userId,
+      integrations: {
+        'All': false,
+        'Amplitude': true
+      }
+    })
   })
+  .catch((err) => {
+    console.log("Error:", err);
+  })
+
 }
 
 
