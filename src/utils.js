@@ -44,12 +44,12 @@ export function sendEventsToAmplitude(response) {
  * @param {Object} 
  */
 function identifyAndTrackEvent(evt) {
-  analytics.identify({
-    userId: evt.userId,
-    traits: {
-      ...evt
-    }
-  });
+  // analytics.identify({
+  //   userId: evt.userId,
+  //   traits: {
+  //     ...evt
+  //   }
+  // });
 
   analytics.track({
     event: evt.event || "Member Added",
