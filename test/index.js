@@ -15,4 +15,14 @@ describe('Testing Node Server', () => {
         done();
     });
   });
+
+  it('should return 200', done => {
+    request({
+        url: testUri,
+        method: "GET",
+    }, (err, res, body) => {
+        assert.equal(200, res.statusCode);
+        done();
+    });
+  });
 });

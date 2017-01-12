@@ -25,7 +25,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // create an analytics instance - set it for development
-var analytics = new _analyticsNode2.default('csDqnJdlycujIJhlE76Yheo8LdvTLIw9');
+var analytics = new _analyticsNode2.default('csDqnJdlycujIJhlE76Yheo8LdvTLIw9', { flushAt: 1 });
 
 /*
   Exportable Functions
@@ -64,18 +64,23 @@ function sendEventsToAmplitude(response) {
  * 
  * @param {Object} 
  */
-function identifyAndTrackEvent(evt) {
-  analytics.identify({
-    userId: evt.userId,
-    traits: _extends({}, evt)
-  });
 
-  analytics.track({
-    event: evt.event || "Member Added",
-    userId: evt.userId,
-    integrations: {
-      'All': false,
-      'Amplitude': true
-    }
+function identifyAndTrackEvent(evt) {
+  new Promise(function () {
+    analytics.identify({
+      userId: evt.userId,
+      traits: _extends({}, evt)
+    });
+
+    analytics.track({
+      event: evt.event || "Member Added",
+      userId: evt.userId,
+      integrations: {
+        'All': false,
+        'Amplitude': true
+      }
+    });
+  }).catch(function (err) {
+    console.log("Error:", err);
   });
 }
