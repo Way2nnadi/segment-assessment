@@ -18,7 +18,7 @@ let analytics = new Analytics('csDqnJdlycujIJhlE76Yheo8LdvTLIw9');
 
 export function sendEventsToAmplitude(response) {
   let lineReader = readline.createInterface({
-    input: fs.createReadStream('data/test.txt')
+    input: fs.createReadStream('data/events.txt')
   })
 
   lineReader.on('line', (line) => {
@@ -44,12 +44,12 @@ export function sendEventsToAmplitude(response) {
  * @param {Object} 
  */
 function identifyAndTrackEvent(evt) {
-  // analytics.identify({
-  //   userId: evt.userId,
-  //   traits: {
-  //     ...evt
-  //   }
-  // });
+  analytics.identify({
+    userId: evt.userId,
+    traits: {
+      ...evt
+    }
+  });
 
   analytics.track({
     event: evt.event || "Member Added",
